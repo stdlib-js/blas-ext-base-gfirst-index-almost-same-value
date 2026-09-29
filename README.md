@@ -79,6 +79,8 @@ var gfirstIndexAlmostSameValue = require( '@stdlib/blas-ext-base-gfirst-index-al
 
 Returns the index of the first element in a strided array which is almost the same value as a corresponding element in another strided array.
 
+<!-- eslint-disable id-length -->
+
 ```javascript
 var x = [ 1.0, 2.0, 3.0, 4.0 ];
 var y = [ 0.0, 0.0, 3.0, 0.0 ];
@@ -91,12 +93,14 @@ The function has the following parameters:
 
 -   **N**: number of indexed elements.
 -   **maxULP**: maximum allowed ULP difference.
--   **x**: first input array.
+-   **x**: first input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
 -   **strideX**: stride length for `x`.
--   **y**: second input array.
+-   **y**: second input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
 -   **strideY**: stride length for `y`.
 
-If the function is unable to find matching elements, the function returns `-1`.
+If the function is unable to find an element in `x` which is almost the same value as a corresponding element in `y`, the function returns `-1`.
+
+<!-- eslint-disable id-length -->
 
 ```javascript
 var x = [ 1.0, 2.0, 3.0, 4.0 ];
@@ -108,6 +112,8 @@ var idx = gfirstIndexAlmostSameValue( x.length, 1, x, 1, y, 1 );
 
 The `N` and stride parameters determine which elements in the strided arrays are accessed at runtime. For example, to compare every other element:
 
+<!-- eslint-disable id-length -->
+
 ```javascript
 var x = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 ];
 var y = [ 0.0, 0.0, 3.0, 0.0, 0.0, 0.0 ];
@@ -117,6 +123,8 @@ var idx = gfirstIndexAlmostSameValue( 3, 1, x, 2, y, 2 );
 ```
 
 Note that indexing is relative to the first index. To introduce an offset, use [`typed array`][mdn-typed-array] views.
+
+<!-- eslint-disable id-length -->
 
 ```javascript
 var Float64Array = require( '@stdlib/array-float64' );
@@ -129,7 +137,7 @@ var y0 = new Float64Array( [ 0.0, 0.0, 3.0, 0.0 ] );
 var x1 = new Float64Array( x0.buffer, x0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
 var y1 = new Float64Array( y0.buffer, y0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
 
-// Find index...
+// Find index:
 var idx = gfirstIndexAlmostSameValue( 2, 1, x1, 1, y1, 1 );
 // returns 1
 ```
@@ -141,6 +149,8 @@ var idx = gfirstIndexAlmostSameValue( 2, 1, x1, 1, y1, 1 );
 <!-- lint enable maximum-heading-length -->
 
 Returns the index of the first element in a strided array which is almost the same value as a corresponding element in another strided array using alternative indexing semantics.
+
+<!-- eslint-disable id-length -->
 
 ```javascript
 var x = [ 1.0, 2.0, 3.0, 4.0 ];
@@ -157,7 +167,7 @@ The function has the following additional parameters:
 
 While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameters support indexing semantics based on starting indices. For example, to access only the last three elements of each strided array:
 
-<!-- eslint-disable max-len -->
+<!-- eslint-disable id-length, max-len -->
 
 ```javascript
 var x = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 ];
@@ -177,7 +187,8 @@ var idx = gfirstIndexAlmostSameValue.ndarray( 3, 1, x, 1, x.length-3, y, 1, y.le
 
 ## Notes
 
--   When comparing elements, the functions test whether elements are approximately the same value within a specified number of ULPs (units in the last place). In contrast to the strict equality operator `===`, the functions distinguish between `+0` and `-0` and treat `NaNs` as the same value.
+-   If `N <= 0`, both functions return `-1`.
+-   When comparing elements, the functions test whether elements are approximately the same value within a specified number of ULPs (units in the last place). In contrast to the strict equality operator `===`, the functions distinguish between `+0` and `-0` and treat `NaN` values as the same value.
 -   Both functions support array-like objects having getter and setter accessors for array element access (e.g., [`@stdlib/array-base/accessor`][@stdlib/array/base/accessor]).
 
 </section>
@@ -251,11 +262,6 @@ For more information on the project, filing bug reports and feature requests, an
 
 ---
 
-## License
-
-See [LICENSE][stdlib-license].
-
-
 ## Copyright
 
 Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
@@ -302,7 +308,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 [esm-readme]: https://github.com/stdlib-js/blas-ext-base-gfirst-index-almost-same-value/blob/esm/README.md
 [branches-url]: https://github.com/stdlib-js/blas-ext-base-gfirst-index-almost-same-value/blob/main/branches.md
 
-[stdlib-license]: https://raw.githubusercontent.com/stdlib-js/blas-ext-base-gfirst-index-almost-same-value/main/LICENSE
+[mdn-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
